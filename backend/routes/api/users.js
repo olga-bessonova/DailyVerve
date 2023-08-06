@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const User = mongoose.model('User');
 
 /* GET users listing. */
@@ -54,6 +55,20 @@ router.post('/register', async (req, res, next) => {
       }
     })
   });
+});
+
+// POST /api/users/login
+router.post('/login', async (req, res, next) => {
+  passport.authenticate('local', async function(err, user) {
+    if (err) return next(err);
+    if (!user) {
+      const err = new Error('Invalid credentials');
+      err.statusCode = 400;
+      err.errors = { email: "Invalid credentials" };
+      return next(err);
+    }
+    return res.json({ user });
+  })(req, res, next);
 });
 
 module.exports = router;

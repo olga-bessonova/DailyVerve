@@ -2,18 +2,21 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const debug = require('debug');
+const passport = require('passport'); 
 
+var app = express();
+app.use(passport.initialize());
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
 
 require('./models/User');
+require('./config/passport'); 
 
 var usersRouter = require('./routes/api/users');
 var tweetsRouter  = require('./routes/api/tweets');
 const csrfRouter = require('./routes/api/csrf');
 
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());

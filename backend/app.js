@@ -1,4 +1,5 @@
 require('./models/User');
+require('./models/Tweet');
 require('./config/passport');
 const express = require('express');
 const cookieParser = require('cookie-parser');

@@ -26,6 +26,23 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
+const insertSeeds = () => {
+  console.log("Resetting db and seeding users and tweets...");
+
+  User.collection.drop()
+                 .then(() => Tweet.collection.drop())
+                 .then(() => User.insertMany(users))
+                 .then(() => Tweet.insertMany(tweets))
+                 .then(() => {
+                   console.log("Done!");
+                   mongoose.disconnect();
+                 })
+                 .catch(err => {
+                   console.error(err.stack);
+                   process.exit(1);
+                 });
+}
+
 /**
  * Connect to Mongo database, then allow the server to listen for requests
  */
@@ -35,10 +52,14 @@ mongoose
     // Use `debug` instead of `dbLogger` if you did not split the debug
     // console into `dbLogger` and `serverLogger` above.
     dbLogger('Connected to MongoDB successfully');
-
+    insertSeeds();
     server.listen(port);
   })
-  .catch((err) => serverLogger(err));
+  /* .catch((err) => serverLogger(err));*/
+  .catch(err => {
+    console.error(err.stack);
+    process.exit(1);
+  });
 
 server.on('error', onError);
 server.on('listening', onListening);

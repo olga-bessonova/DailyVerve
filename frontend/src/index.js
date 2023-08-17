@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/store';
 
 let store = configureStore({});
@@ -11,9 +11,9 @@ let store = configureStore({});
 function Root() {
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <App />
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 }

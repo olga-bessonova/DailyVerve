@@ -1,31 +1,36 @@
 {
-  "name": "backend",
-  "version": "0.0.0",
-  "private": true,
+  "name": "mern-affirmail-backend",
+  "version": "1.0.0",
+  "description": "Backend for a Affirmail with the MERN stack",
+  "main": "./bin/www",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "dotenv nodemon ./bin/www --inspect",
-    "seed": "dotenv node seeders/seeds.js"
+    "dev": "dotenv nodemon ./bin/www"
   },
+  "author": "App Academy",
+  "license": "MIT",
   "dependencies": {
-    "@faker-js/faker": "^8.0.2",
+    "@faker-js/faker": "^7.6.0",
+    "aws-sdk": "^2.1379.0",
     "bcryptjs": "^2.4.3",
-    "cookie-parser": "~1.4.4",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.1",
-    "mongoose": "^7.4.2",
-    "morgan": "~1.9.1",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.6.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "openai": "^4.0.1",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "dotenv-cli": "^7.2.1",
-    "nodemon": "^3.0.1"
+    "dotenv-cli": "^6.0.0",
+    "nodemon": "^2.0.19"
   }
 }

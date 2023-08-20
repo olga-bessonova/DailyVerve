@@ -9,6 +9,7 @@ const passport = require('passport');
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
 const csrfRouter = require('./routes/api/csrf');
+const openAiRouter = require('./routes/api/openAi');
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
@@ -44,6 +45,7 @@ app.use(
 app.use('/api/users', usersRouter);
 app.use('/api/tweets', tweetsRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/openai', openAiRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.

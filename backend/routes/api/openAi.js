@@ -17,12 +17,9 @@ router.post('/ask', async (req, res, next) => {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
+      max_tokens: 50,
     });
-    const completion = response.data.choices[0].text;
-    return res.status(200).json({
-      success: true,
-      message: completion,
-    });
+    return res.json(response);
   } catch (error) {
     console.log(error.message);
     next(error);

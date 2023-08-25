@@ -1,5 +1,6 @@
 require('./models/User');
 require('./models/Tweet');
+require('./models/Message');
 require('./config/passport');
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -9,7 +10,7 @@ const passport = require('passport');
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
 const csrfRouter = require('./routes/api/csrf');
-const openAiRouter = require('./routes/api/openAi');
+const messagesRouter = require('./routes/api/messages');
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
@@ -45,7 +46,7 @@ app.use(
 app.use('/api/users', usersRouter);
 app.use('/api/tweets', tweetsRouter);
 app.use('/api/csrf', csrfRouter);
-app.use('/api/openai', openAiRouter);
+app.use('/api/messages', messagesRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.

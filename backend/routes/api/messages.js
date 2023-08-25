@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const OpenAI = require('openai');
+const Message = mongoose.model('Message');
+const { requireUser } = require('../../config/passport');
 const { openAiApiKey } = require('../../config/keys');
 
 const openai = new OpenAI({
   apiKey: openAiApiKey,
 });
 
-// POST /api/openai/ask
-router.post('/ask', async (req, res, next) => {
+// POST /api/messages/
+router.post('/', requireUser, async (req, res, next) => {
   const prompt = req.body.prompt;
   try {
     if (!prompt) {
@@ -19,7 +22,17 @@ router.post('/ask', async (req, res, next) => {
       messages: [{ role: 'user', content: prompt }],
       max_tokens: 50,
     });
-    return res.json(response);
+
+    const newMessage = new Message({
+      owner: req.user._id,
+      text: response.choices[0].message.content,
+      prompt,
+    });
+
+    let message = await newMessage.save();
+    message = await message.populate('owner', '_id username');
+
+    return res.json(message);
   } catch (error) {
     console.log(error.message);
     next(error);

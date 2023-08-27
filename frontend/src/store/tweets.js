@@ -34,7 +34,7 @@ export const clearTweetErrors = (errors) => ({
 
 export const fetchTweets = () => async (dispatch) => {
   try {
-    const res = await jwtFetch('/api/tweets');
+    const res = await ('/api/tweets');
     const tweets = await res.json();
     dispatch(receiveTweets(tweets));
   } catch (err) {

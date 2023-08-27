@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
+import Message from './components/Message/Message';
 
 import MainPage from './components/MainPage/MainPage';
 import LoginForm from './components/SessionForms/LoginForm';
@@ -33,6 +34,9 @@ function App() {
           <ProtectedRoute exact path='/tweets' component={Tweets} />
           <ProtectedRoute exact path='/profile' component={Profile} />
           <ProtectedRoute exact path='/tweets/new' component={TweetCompose} />
+
+          <ProtectedRoute exact path='/messages' component={Message} />
+
         </Switch>
       </>
     )

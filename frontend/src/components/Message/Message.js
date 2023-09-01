@@ -28,7 +28,7 @@ const Message = () => {
       setResponse('An error occurred. Please try again.');
     }
   };
-
+  
   return (
     <div className='messages_container'>
       <h1>OpenAI Chat Interface</h1>
@@ -46,6 +46,7 @@ const Message = () => {
         <h2>Response:</h2>
         <p>{response}</p>
       </div>
+
     </div>
   );
 };

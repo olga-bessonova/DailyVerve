@@ -46,7 +46,7 @@ const Message = () => {
         <h2>Response:</h2>
         <p>{response}</p>
       </div>
-
+        {/* <button onClick={handleEmail}>Email</button> */}
     </div>
   );
 };

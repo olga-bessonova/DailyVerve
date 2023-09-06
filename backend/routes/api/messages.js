@@ -41,56 +41,56 @@ router.post('/', requireUser, async (req, res, next) => {
   }
 });
 
-// // POST /api/messages/email
+// POST /api/messages/email
 
-// router.post('/email', async (req, res, next) => {
-//     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-//     const msg = {
-//       to: 'teamsigndesign@gmail.com', 
-//       from: 'info.daily.verve@gmail.com', 
-//       send_at: 1693877295,
-//       subject: 'Sending with SendGrid is Fun',
-//       text: 'Why did the scarecrow win an award?Because he was outstanding in his field!',
-//       html: "<strong> What did one wall say to the other wall? I'll meet you at the corner! </strong>",
-//     }
-//     sgMail
-//       .send(msg)
-//       .then(() => {
-//         console.log('Email sent')
-//         res.send(msg)
-//       })
-//       .catch((error) => {
-//         console.error(error)
-//       })
-// });
-// const sendEmail = () => {
-//   const msg = {
-//     to: 'olga.sleepless@gmail.com',
-//     from: 'info.daily.verve@gmail.com',
-//     subject: 'Sending with SendGrid is Fun',
-//     text: "Why did the scarecrow win an award? Because he was outstanding in his field!",
-//     html: "<strong>What did one wall say to the other wall? I'll meet you at the corner!</strong>",
-//   };
+router.post('/email', async (req, res, next) => {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+    const msg = {
+      to: 'teamsigndesign@gmail.com', 
+      from: 'info.daily.verve@gmail.com', 
+      send_at: 1693877295,
+      subject: 'Sending with SendGrid is Fun',
+      text: 'Why did the scarecrow win an award?Because he was outstanding in his field!',
+      html: "<strong> What did one wall say to the other wall? I'll meet you at the corner! </strong>",
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+        res.send(msg)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+});
+const sendEmail = () => {
+  const msg = {
+    to: 'olga.sleepless@gmail.com',
+    from: 'info.daily.verve@gmail.com',
+    subject: 'Sending with SendGrid is Fun',
+    text: "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    html: "<strong>What did one wall say to the other wall? I'll meet you at the corner!</strong>",
+  };
 
-//   sgMail
-//     .send(msg)
-//     .then(() => {
-//       console.log('Email sent');
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
 
-// // Schedule the email to be sent every day at 9:40 PM EST
-// const cronExpression = '40 21 * * *'; // EST is 5 hours behind UTC
-// const scheduledJob = schedule.scheduleJob(cronExpression, () => {
-//   sendEmail();
-// });
+// Schedule the email to be sent every day at 9:40 PM EST
+const cronExpression = '40 21 * * *'; // EST is 5 hours behind UTC
+const scheduledJob = schedule.scheduleJob(cronExpression, () => {
+  sendEmail();
+});
 
-// router.post('/email', async (req, res, next) => {
-//   res.send('Email will be sent every day at 9:40 PM EST.');
-// });
+router.post('/email', async (req, res, next) => {
+  res.send('Email will be sent every day at 9:40 PM EST.');
+});
 
 
 

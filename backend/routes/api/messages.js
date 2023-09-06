@@ -44,14 +44,17 @@ router.post('/', requireUser, async (req, res, next) => {
 // POST /api/messages/email
 
 router.post('/email', async (req, res, next) => {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  // scheduleJob * seconds, * minutes, * hours, * day of month (1-31), * month, * day of week
+  const job = schedule.scheduleJob('0 * 7 * * *', function () {
     const msg = {
       to: 'olga.sleepless@gmail.com', 
       from: 'info.daily.verve@gmail.com', 
-      send_at: `Cheers to a new day!`,
+      // send_at: 1694050095,
       subject: `Have a Nice Day!`,
-      text: 'Why did the scarecrow win an award?Because he was outstanding in his field!',
-      html: "<strong> What did one wall say to the other wall? I'll meet you at the corner! </strong>",
+      html: `<h1>Here comes something warm and pleasurable</h1> <strong> What did one wall say to the other wall? I'll meet you at the corner! </strong> <br>
+      <h2>Hello from Daily Verve!</h2>`,
+      // text: 'Test Test Why did the scarecrow win an award? Because he was outstanding in his field!',
     }
     sgMail
       .send(msg)
@@ -62,18 +65,8 @@ router.post('/email', async (req, res, next) => {
       .catch((error) => {
         console.error(error)
       })
+  })
 });
-
-// // Schedule the email to be sent every day at 9:40 PM EST
-// const cronExpression = '40 21 * * *'; // EST is 5 hours behind UTC
-// const scheduledJob = schedule.scheduleJob(cronExpression, () => {
-//   sendEmail();
-// });
-
-// router.post('/email', async (req, res, next) => {
-//   res.send('Email will be sent every day at 9:40 PM EST.');
-// });
-
 
 
 module.exports = router;

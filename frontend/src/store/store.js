@@ -3,8 +3,14 @@ import thunk from 'redux-thunk';
 import session from './session';
 import errors from './errors';
 import tweets from './tweets';
+import users from './users'
 
-const rootReducer = combineReducers({ session, errors, tweets });
+const rootReducer = combineReducers({ 
+  session, 
+  errors, 
+  tweets,
+  users 
+});
 
 let enhancer;
 
@@ -12,7 +18,8 @@ if (process.env.NODE_ENV === 'production') {
   enhancer = applyMiddleware(thunk);
 } else {
   const logger = require('redux-logger').default;
-  const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 

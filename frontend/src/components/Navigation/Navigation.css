@@ -1,0 +1,117 @@
+:root {
+  --dark-red: #4d1207;
+  --darker-blue: #12033c;  
+  --neutral: rgb(172, 172, 172);
+  --light-blue: #60a0ba;
+  --dark-blue: #8ab3e8;
+  --logo-blue: rgb(169, 188, 212);
+  --yellow: rgb(247, 202, 24);
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C; 
+  --dark-black-color: #383838;
+
+  --orange-brand: #FFB067;
+  --yellow-brand: #FFED86;
+  --blue-brand: #A2DCE7;
+  --pink-brand: #F8CCDC;
+
+  --blue-sands-brand: #29B3FF;
+  --lightblue-sands-brand: #81EAFF;
+  --darkyellow-sands-brand: #FBC00E;
+  --yellow-sands-brand: #FFD774;
+  }
+
+header.site_header {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  padding: 0px 0px 0px 70px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 9999;   
+}
+
+header.site_header.notsplash_page {
+  background: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+}
+
+.site_header_right_side{
+  position: relative;
+}
+  
+.navlinkdiv {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  justify-content: center; 
+}
+
+.navlink {
+  text-decoration: none;
+  align-items: center;
+  color: black;
+  transition: 0.5s;
+  cursor: pointer;
+  position: relative;
+  opacity: 1;
+  display: flex;
+  transition: box-shadow 0.3s ease;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px 15px;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  position: relative;
+  opacity: 1;
+}
+
+.navlink.splash_page {
+  color:rgb(236, 232, 232);
+}
+
+.navlink:hover {
+  transform: scale(1.025);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  height: 55px;  
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+}
+
+.logo-box {
+  transition: 0.5s;
+}
+
+.logo-box:hover {
+    transform: scale(1.025);
+    border-radius: 20px;
+}
+
+.logo_name {
+  color:rgb(236, 232, 232);
+  font-size: 35px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.logo_name.notsplash_page{
+  color:white;
+  display: flex;
+  align-items: center;
+}
+
+.logo_name img {
+  width: 100px;
+}
+
+
+
+

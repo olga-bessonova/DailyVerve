@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const OpenAI = require('openai');
 const Message = mongoose.model('Message');
 const sgMail = require('@sendgrid/mail')
+const schedule = require('node-schedule');
 const { requireUser } = require('../../config/passport');
 const { openAiApiKey } = require('../../config/keys');
 
@@ -43,13 +44,17 @@ router.post('/', requireUser, async (req, res, next) => {
 // POST /api/messages/email
 
 router.post('/email', async (req, res, next) => {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  // scheduleJob * seconds, * minutes, * hours, * day of month (1-31), * month, * day of week
+  const job = schedule.scheduleJob('6 17 * * *', function () {
     const msg = {
-      to: 'olga.sleepless@gmail.com', // Change to your recipient
-      from: 'info.daily.verve@gmail.com', // Change to your verified sender
-      subject: 'Sending with SendGrid is Fun',
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      to: 'olga.sleepless@gmail.com', 
+      from: 'info.daily.verve@gmail.com', 
+      // send_at: 1694050095,
+      subject: `Have a Nice Day!`,
+      html: `<h1>Here comes something warm and pleasurable</h1> <strong> What did one wall say to the other wall? I'll meet you at the corner! </strong> <br>
+      <h2>Hello from Daily Verve!</h2>`,
+      // text: 'Test Test Why did the scarecrow win an award? Because he was outstanding in his field!',
     }
     sgMail
       .send(msg)
@@ -60,8 +65,8 @@ router.post('/email', async (req, res, next) => {
       .catch((error) => {
         console.error(error)
       })
+  })
 });
-
 
 
 module.exports = router;

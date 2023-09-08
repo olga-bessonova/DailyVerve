@@ -114,7 +114,7 @@ function SignupFormModal (props) {
 
         <div className='profile_image_container'>
           <span>Profile Image</span>
-          <label className="image_input_label" for="image_input_profile">Choose File</label>
+          <label className="image_input_label" htmlFor="image_input_profile">Choose File</label>
           <input  className="image_input" id="image_input_profile" type="file" accept=".jpg, .jpeg, .png"
             onChange={updateFile}
           />

@@ -7,22 +7,22 @@ import { logout } from '../../store/session';
 import './DropDown.css';
 
 const DropDown = ({ user }) => {
-  
   const dispatch = useDispatch();
-
+  
   const toggleMenu = () => {
+    // debugger
     setMenu(open => !open);
-    console.log(user)
   };
-
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
-    if (!menu) return;
+    if (menu === false) return;
 
     const closeMenu = () => {
+      console.log("closeMenu")
       setMenu(false);
     };
+    console.log(user)
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [menu]);
@@ -30,8 +30,8 @@ const DropDown = ({ user }) => {
   const logoutUser = e => {
     e.preventDefault();
     dispatch(logout());
-}
-
+  }
+  console.log(menu)
   return (
     <>
       <button className='profile_button' onClick={toggleMenu}>
@@ -40,15 +40,18 @@ const DropDown = ({ user }) => {
       </button>
 
       {menu && (
-        <ul className="profile_dropdown" onClick={() => setMenu(false)}>
+        // <ul className="profile_dropdown" onClick={() => setMenu(false)}>
+        <ul className="profile_dropdown">
           {/* <li className='profile_dropdown_navlink' id="profile_dropdown_navlink_username">{user.username}</li> */}
-          <li id="profile_dropdown_navlink_username">{user.email}</li>
+          <li id="profile_dropdown_navlink_username">{user.username}</li>
           <li className='dropdown_divider'></li>
           <li className='profile_dropdown_navlink'>
-            <p>test</p>
+            <Link to={'/profile'}>
+              <span className='profile_dropdown_span' id="your_trips_button">your trips</span>
+            </Link>
           </li>
 
-          {/* <li className='profile_dropdown_navlink'> <button id="create_trip_button" onClick={()=> setShowCreateTripModal(true)}>create a trip</button></li> */}
+          <li className='profile_dropdown_navlink'> <button id="create_trip_button" >create a trip</button></li>
 
           <li className='profile_dropdown_navlink'> 
             <Link to={'/'}> 
@@ -59,11 +62,6 @@ const DropDown = ({ user }) => {
         </ul>
       )}
 
-      {/* {showCreateTripModal && (
-        <Modal onClose={() => setShowCreateTripModal(false)}>
-          <TripFormModal showCreateTripModal={showCreateTripModal} setShowCreateTripModal={setShowCreateTripModal} />
-        </Modal>
-      )} */}
     </>
   );
 }

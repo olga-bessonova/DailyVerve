@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import jwtFetch from '../../store/jwt.js';
+import { logout } from '../../store/session'
 // import './Message.css';
 
 const Message = () => {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
+  const dispatch = useDispatch();
+  
+  const logoutUser = (e) => {
+    e.preventDefault();
+    dispatch(logout())
+  }
 
   const handleSubmit = async () => {
     try {
@@ -47,7 +55,8 @@ const Message = () => {
         <p>{response}</p>
       </div>
         {/* <button onClick={handleEmail}>Email</button> */}
-    </div>
+        <button id="logout_button" onClick={logoutUser}>logout</button>
+        </div>
   );
 };
 

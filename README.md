@@ -1,1 +1,1 @@
-# affirmail
+# Daily Verve

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import jwtFetch from '../../store/jwt.js';
-import { logout } from '../../store/session'
+import { logout } from '../../store/session';
 // import './Message.css';
 
 const Message = () => {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const dispatch = useDispatch();
-  
+
   const logoutUser = (e) => {
     e.preventDefault();
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   const handleSubmit = async () => {
     try {
@@ -31,12 +31,20 @@ const Message = () => {
       const responseData = await response.json();
 
       setResponse(responseData.text);
+
+      await jwtFetch('/api/messages/email/', {
+        method: 'POST',
+        // body: responseData.text,
+        body: JSON.stringify({
+          text: responseData.text,
+        }),
+      });
     } catch (error) {
       console.error(error);
       setResponse('An error occurred. Please try again.');
     }
   };
-  
+
   return (
     <div className='messages_container'>
       <h1>OpenAI Chat Interface</h1>
@@ -54,9 +62,11 @@ const Message = () => {
         <h2>Response:</h2>
         <p>{response}</p>
       </div>
-        {/* <button onClick={handleEmail}>Email</button> */}
-        <button id="logout_button" onClick={logoutUser}>logout</button>
-        </div>
+      {/* <button onClick={handleEmail}>Email</button> */}
+      <button id='logout_button' onClick={logoutUser}>
+        logout
+      </button>
+    </div>
   );
 };
 

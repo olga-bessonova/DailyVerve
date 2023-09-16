@@ -112,13 +112,13 @@ function SignupFormModal (props) {
           {password !== password2 && 'Confirm Password field must match'}
         </div>
 
-        <div className='profile_image_container'>
+        {/* <div className='profile_image_container'>
           <span>Profile Image</span>
           <label className="image_input_label" htmlFor="image_input_profile">Choose File</label>
           <input  className="image_input" id="image_input_profile" type="file" accept=".jpg, .jpeg, .png"
             onChange={updateFile}
           />
-        </div>
+        </div> */}
         
         <div className="agree-message">            
             By clicking <span className="continue-span"> Continue </span>

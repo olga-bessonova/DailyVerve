@@ -24,8 +24,12 @@ const DropDown = ({ user }) => {
     };
     console.log(user)
     document.addEventListener('click', closeMenu);
-    return () => document.removeEventListener("click", closeMenu);
-  }, [menu]);
+    const returnClose = () => {
+      console.log('second return');
+      document.removeEventListener("click", closeMenu);
+    }
+    return returnClose
+  }, []);
 
   const logoutUser = e => {
     e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import jwtFetch from '../../store/jwt.js';
 import { logout } from '../../store/session';
 // import './Message.css';
@@ -8,6 +8,10 @@ const Message = () => {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.session.user);
+
+  console.log(currentUser);
 
   const logoutUser = (e) => {
     e.preventDefault();
@@ -34,9 +38,9 @@ const Message = () => {
 
       await jwtFetch('/api/messages/email/', {
         method: 'POST',
-        // body: responseData.text,
         body: JSON.stringify({
           text: responseData.text,
+          email: currentUser.email,
         }),
       });
     } catch (error) {

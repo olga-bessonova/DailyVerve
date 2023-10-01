@@ -12,40 +12,13 @@ const ContactUs = () => {
         <div className="contact_us_grid_container">
           <div className="contact_us_column">
             <div className="contact_us_image_container">
-              <img src={require("../../assets/contactus/will.jpg")} alt=""></img>
-            </div>
-            <div className="contact_us_name">
-              <p>Will Davis</p>
-            </div>
-            <div className="contact_us_role">
-              <p>team lead</p>
-            </div>
-
-            <div className="social_links">
-              <div>
-                <a className = 'github-link' target="_blank" rel="noopener noreferrer" href="https://github.com/wtdavis/">
-                  <i className="fa-brands fa-github fa-2x"></i>
-                </a>
-              </div>
-              <div>
-                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/william-davis-9390801ab">
-                  <i className="fa-brands fa-linkedin-in fa-2x"></i>
-                </a>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="contact_us_column">
-            <div className="contact_us_image_container">
               <img src={require("../../assets/contactus/olga.jpg")} alt=""></img>
             </div>
             <div className="contact_us_name">
               <p>Olga Bessonova</p>
             </div>
             <div className="contact_us_role">
-              <p>frontend lead</p>
+              <p>fullstack developer</p>
             </div>
             <div className="social_links">
               <div>
@@ -64,13 +37,13 @@ const ContactUs = () => {
 
           <div className="contact_us_column">
             <div className="contact_us_image_container">
-              <img src={require("../../assets/contactus/zane.jpg")} alt=""></img>
+              <img src={require("../../assets/contactus/slava.jpg")} alt=""></img>
             </div>
             <div className="contact_us_name">
-              <p>Zane Eisen</p>
+              <p>Stanislau Hekht</p>
             </div>
             <div className="contact_us_role">
-              <p>backend lead</p>
+              <p>fullstack developer</p>
             </div>
             <div className="social_links">
               <div>

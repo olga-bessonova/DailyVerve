@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 // import NavBar from './components/NavBar/NavBar';
 import Navigation from './components/Navigation/Navigation';
+import ContactUs from './components/ContactUs/ContactUs';
 import Message from './components/Message/Message';
 
 import MainPage from './components/MainPage/MainPage';
@@ -32,6 +33,7 @@ function App() {
         {/* <NavBar /> */}
         <Navigation />
         <Switch>
+          <Route exact path="/contact"><ContactUs /></Route>
           <AuthRoute exact path='/' component={MainPage} />
           <AuthRoute exact path='/login' component={LoginForm} />
           <AuthRoute exact path='/signup' component={SignupForm} />

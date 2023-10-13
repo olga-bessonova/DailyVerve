@@ -13,7 +13,27 @@ const userSchema = new Schema({
   hashedPassword: {
     type: String,
     required: true
-  }
+  },
+  subscription: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  subAffirmation: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  subArt: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  subJoke: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
   // profileImageUrl: {
   //   type: String,
   //   required: false

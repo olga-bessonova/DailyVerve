@@ -52,14 +52,14 @@ const Message = () => {
   return (
     <>
       <form>
-        <label>
+        {/* <label>
           <input
             type="checkbox"
-            checked={isChecked}
+            // checked={isChecked}
             onChange={handleCheckedboxChange}
             
           />
-        </label>
+        </label> */}
 
       </form>
       <div className='messages_container'>

@@ -41,31 +41,21 @@ router.post('/', requireUser, async (req, res, next) => {
   }
 });
 
-router.post('/', requireUser, async (req, res, next) => {
-  const prompt = req.body.prompt;
+// POST /api/messages/image
+router.post('/image', requireUser, async (req, res, next) => {
+  // const prompt = req.body.prompt;
   try {
-    if (!prompt) {
-      throw new Error('Uh oh, no prompt was provided');
-    }
+  //   if (!prompt) {
+  //     throw new Error('Uh oh, no prompt was provided');
+  //   }
 
-    // Make a request to OpenAI's image generation API
-    const imageGenerationResponse = await axios.post('YOUR_IMAGE_API_ENDPOINT', {
-      prompt: prompt,
-      // Include any other required parameters
-    }, {
-      headers: {
-        'Authorization': 'Bearer YOUR_OPENAI_API_KEY',
-        'Content-Type': 'application/json',
-      },
+    const response = await openai.createImage({
+      model: "dall-e-3",
+      prompt: "a white siamese cat",
+      n: 1,
+      size: "1024x1024",
     });
-
-    // Handle the image generation response as needed
-
-    // Your existing code for chat completion
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt }],
-    });
+    image_url = response.data.data[0].url;
 
     const newMessage = new Message({
       owner: req.user._id,

@@ -16,8 +16,8 @@ const messageSchema = new Schema(
       required: true,
     },
     // imageUrls: [{ type: String }],
-    imageUrls: {
-      type: [String],
+    imageUrl: {
+      type: String,
       required: false
     },
   },

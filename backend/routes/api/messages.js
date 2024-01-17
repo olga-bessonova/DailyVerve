@@ -7,6 +7,7 @@ const sgMail = require('@sendgrid/mail');
 const schedule = require('node-schedule');
 const { requireUser } = require('../../config/passport');
 const { openAiApiKey } = require('../../config/keys');
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
 const openai = new OpenAI({
   apiKey: openAiApiKey,
@@ -29,38 +30,7 @@ router.post('/', requireUser, async (req, res, next) => {
       owner: req.user._id,
       text: response.choices[0].message.content,
       prompt,
-    });
-
-    let message = await newMessage.save();
-    message = await message.populate('owner', '_id username');
-
-    return res.json(message);
-  } catch (error) {
-    console.log(error.message);
-    next(error);
-  }
-});
-
-// POST /api/messages/image
-router.post('/image', requireUser, async (req, res, next) => {
-  // const prompt = req.body.prompt;
-  try {
-  //   if (!prompt) {
-  //     throw new Error('Uh oh, no prompt was provided');
-  //   }
-
-    const response = await openai.createImage({
-      model: "dall-e-3",
-      prompt: "a white siamese cat",
-      n: 1,
-      size: "1024x1024",
-    });
-    image_url = response.data.data[0].url;
-
-    const newMessage = new Message({
-      owner: req.user._id,
-      text: response.choices[0].message.content,
-      prompt,
+      imageUrl
     });
 
     let message = await newMessage.save();
@@ -72,6 +42,41 @@ router.post('/image', requireUser, async (req, res, next) => {
     next(error);
   }
 });
+
+// POST /api/messages/image
+// router.post('/image', singleFileUpload("images"), requireUser, async (req, res, next) => {
+//   // const prompt = req.body.prompt;
+//   const imageUrl = await singleFileUpload({ files: req.file, public: true });
+
+//   try {
+//   //   if (!prompt) {
+//   //     throw new Error('Uh oh, no prompt was provided');
+//   //   }
+
+//     const response = await openai.createImage({
+//       model: "dall-e-3",
+//       prompt: "a white siamese cat",
+//       n: 1,
+//       size: "1024x1024",
+//     });
+//     image_url = response.data.data[0].url;
+
+//     const newMessage = new Message({
+//       owner: req.user._id,
+//       text: response.choices[0].message.content,
+//       prompt,
+//       image_url
+//     });
+
+//     let message = await newMessage.save();
+//     message = await message.populate('owner', '_id username profileImageUrl');
+
+//     return res.json(message);
+//   } catch (error) {
+//     console.log(error.message);
+//     next(error);
+//   }
+// });
 
 // POST /api/messages/email
 

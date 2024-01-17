@@ -41,6 +41,7 @@ const Message = () => {
         body: JSON.stringify({
           text: responseData.text,
           email: currentUser.email,
+          imageUrl: responseData.imageUrl,
         }),
       });
     } catch (error) {
@@ -60,7 +61,6 @@ const Message = () => {
             
           />
         </label> */}
-
       </form>
       <div className='messages_container'>
         <h1>OpenAI Chat Interface</h1>

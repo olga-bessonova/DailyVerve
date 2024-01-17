@@ -1,11 +1,11 @@
-const AWS = require("aws-sdk");
-const multer = require("multer");
-const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
-const NAME_OF_BUCKET = "daily-verve";
+const AWS = require('aws-sdk');
+const multer = require('multer');
+const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+const NAME_OF_BUCKET = 'daily-verve';
 
 const singleFileUpload = async ({ file, public = false }) => {
   const { originalname, buffer } = file;
-  const path = require("path");
+  const path = require('path');
 
   // Set the name of the file in your S3 bucket to the date in ms plus the
   // extension name.
@@ -13,7 +13,7 @@ const singleFileUpload = async ({ file, public = false }) => {
   const uploadParams = {
     Bucket: NAME_OF_BUCKET,
     Key: public ? `public/${Key}` : Key,
-    Body: buffer
+    Body: buffer,
   };
   const result = await s3.upload(uploadParams).promise();
 
@@ -22,17 +22,17 @@ const singleFileUpload = async ({ file, public = false }) => {
   return public ? result.Location : result.Key;
 };
 
-const multipleFilesUpload = async ({files, public = false}) => {
+const multipleFilesUpload = async ({ files, public = false }) => {
   return await Promise.all(
     files.map((file) => {
-      return singleFileUpload({file, public});
+      return singleFileUpload({ file, public });
     })
   );
 };
 
 const storage = multer.memoryStorage({
   destination: function (req, file, callback) {
-    callback(null, "");
+    callback(null, '');
   },
 });
 
@@ -46,5 +46,5 @@ module.exports = {
   singleFileUpload,
   multipleFilesUpload,
   singleMulterUpload,
-  multipleMulterUpload
+  multipleMulterUpload,
 };

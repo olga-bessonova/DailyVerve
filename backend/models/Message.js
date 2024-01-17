@@ -15,6 +15,11 @@ const messageSchema = new Schema(
       type: String,
       required: true,
     },
+    // imageUrls: [{ type: String }],
+    imageUrl: {
+      type: String,
+      required: false
+    },
   },
   {
     timestamps: true,

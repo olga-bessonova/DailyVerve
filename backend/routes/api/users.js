@@ -8,7 +8,8 @@ const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
-
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+const DEFAULT_PROFILE_IMAGE_URL = "https://daily-verve.s3.amazonaws.com/profile_image/default-profileImage3.png"
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -18,7 +19,7 @@ router.get('/', function (req, res, next) {
 });
 
 // POST /api/users/register
-router.post('/register', validateRegisterInput, async (req, res, next) => {
+router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({
@@ -41,9 +42,14 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   }
 
   // Otherwise create a new user
+  const profileImageUrl = req.file ?
+      await singleFileUpload({ file: req.file, public: true }) :
+      DEFAULT_PROFILE_IMAGE_URL;
+
   const newUser = new User({
     username: req.body.username,
-    email: req.body.email,
+    profileImageUrl,
+    email: req.body.email
   });
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -63,7 +69,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 });
 
 // POST /api/users/login
-router.post('/login', validateLoginInput, async (req, res, next) => {
+router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, res, next) => {
   passport.authenticate('local', async function (err, user) {
     if (err) return next(err);
     if (!user) {
@@ -89,6 +95,7 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
+    profileImageUrl: req.user.profileImageUrl,
     email: req.user.email,
   });
 });

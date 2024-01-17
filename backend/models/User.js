@@ -10,14 +10,20 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  profileImageUrl: {
+    type: String,
+    required: true
+  },
   hashedPassword: {
     type: String,
     required: true
-  }
-  // profileImageUrl: {
-  //   type: String,
-  //   required: false
-  // },
+  },
+  subscription: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  
   // messages: [Schema.Types.ObjectId],
 }, {
   timestamps: true

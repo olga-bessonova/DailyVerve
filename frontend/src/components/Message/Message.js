@@ -41,6 +41,7 @@ const Message = () => {
         body: JSON.stringify({
           text: responseData.text,
           email: currentUser.email,
+          imageUrl: responseData.imageUrl,
         }),
       });
     } catch (error) {
@@ -50,27 +51,39 @@ const Message = () => {
   };
 
   return (
-    <div className='messages_container'>
-      <h1>OpenAI Chat Interface</h1>
-      <div>
-        <label htmlFor='prompt'>Enter your prompt:</label>
-        <input
-          type='text'
-          id='prompt'
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <button onClick={handleSubmit}>Submit</button>
+    <>
+      <form>
+        {/* <label>
+          <input
+            type="checkbox"
+            // checked={isChecked}
+            onChange={handleCheckedboxChange}
+            
+          />
+        </label> */}
+      </form>
+      <div className='messages_container'>
+        <h1>OpenAI Chat Interface</h1>
+        <div>
+          <label htmlFor='prompt'>Enter your prompt:</label>
+          <input
+            type='text'
+            id='prompt'
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+        <div>
+          <h2>Response:</h2>
+          <p>{response}</p>
+        </div>
+        {/* <button onClick={handleEmail}>Email</button> */}
+        <button id='logout_button' onClick={logoutUser}>
+          logout
+        </button>
       </div>
-      <div>
-        <h2>Response:</h2>
-        <p>{response}</p>
-      </div>
-      {/* <button onClick={handleEmail}>Email</button> */}
-      <button id='logout_button' onClick={logoutUser}>
-        logout
-      </button>
-    </div>
+    </>
   );
 };
 

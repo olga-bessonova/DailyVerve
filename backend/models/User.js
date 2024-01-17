@@ -10,6 +10,10 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  profileImageUrl: {
+    type: String,
+    required: true
+  },
   hashedPassword: {
     type: String,
     required: true
@@ -19,25 +23,7 @@ const userSchema = new Schema({
     default: false,
     required: true
   },
-  subAffirmation: {
-    type: Boolean,
-    default: false,
-    required: true
-  },
-  subArt: {
-    type: Boolean,
-    default: false,
-    required: true
-  },
-  subJoke: {
-    type: Boolean,
-    default: false,
-    required: true
-  },
-  // profileImageUrl: {
-  //   type: String,
-  //   required: false
-  // },
+  
   // messages: [Schema.Types.ObjectId],
 }, {
   timestamps: true

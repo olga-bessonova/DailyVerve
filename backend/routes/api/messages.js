@@ -64,7 +64,7 @@ router.post('/image', requireUser, async (req, res, next) => {
     });
 
     let message = await newMessage.save();
-    message = await message.populate('owner', '_id username');
+    message = await message.populate('owner', '_id username profileImageUrl');
 
     return res.json(message);
   } catch (error) {

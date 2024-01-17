@@ -26,19 +26,19 @@ router.post('/', requireUser, async (req, res, next) => {
     });
     const text = responseChatGpt.choices[0].message.content;
 
-    const response = await openai.images.generate({
+    const responseDalle = await openai.images.generate({
       model: 'dall-e-3',
       prompt: text,
       n: 1,
       size: '1024x1024',
     });
-    const image_url = response.data[0].url;
+    const imageUrl = responseDalle.data[0].url;
 
     const newMessage = new Message({
       owner: req.user._id,
       text,
       prompt,
-      imageUrl: image_url,
+      imageUrl,
     });
 
     let message = await newMessage.save();

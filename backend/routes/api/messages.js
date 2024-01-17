@@ -55,7 +55,7 @@ router.post('/', requireUser, async (req, res, next) => {
 router.post('/email', async (req, res, next) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   // scheduleJob * seconds, * minutes, * hours, * day of month (1-31), * month, * day of week
-  const job = schedule.scheduleJob('* 22 * * *', function () {
+  const job = schedule.scheduleJob('45 13 * * *', function () {
     const msg = {
       to: req.body.email,
       from: 'info.daily.verve@gmail.com',

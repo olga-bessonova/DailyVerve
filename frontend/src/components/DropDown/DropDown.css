@@ -47,7 +47,7 @@
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
 }
 
-.drop_down_username {
+.drop_down_firstName {
   color: black;
   margin-left: 8px;
 }
@@ -109,7 +109,7 @@
   box-shadow: 1px 1px 2px 1px #8a8888;  
 }
 
-#profile_dropdown_navlink_username {
+#profile_dropdown_navlink_firstName {
   /* cursor: none; */
   text-align: right;
   margin: 20px;

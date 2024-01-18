@@ -39,20 +39,19 @@ const DropDown = ({ user }) => {
   return (
     <>
       <button className='profile_button' onClick={toggleMenu}>
-        {/* <img className="profile_image" src={user.profileImageUrl} alt=""/>  */}
-        <span className='drop_down_username'>{user.username}</span>
+        <img className="profile_image" src={user.profileImageUrl} alt=""/> 
+        <span className='drop_down_firstName'>{user.firstName}</span>
       </button>
 
       {menu && (
         // <ul className="profile_dropdown" onClick={() => setMenu(false)}>
         <ul className="profile_dropdown">
-          {/* <li className='profile_dropdown_navlink' id="profile_dropdown_navlink_username">{user.username}</li> */}
-          <li id="profile_dropdown_navlink_username">{user.username}</li>
+          <li id="profile_dropdown_navlink_firstName">{user.firstName} {user.lastName}</li>
           <li className='dropdown_divider'></li>
           <li className='profile_dropdown_navlink'>
-            <Link to={'/profile'}>
+            {/* <Link to={'/profile'}>
               <span className='profile_dropdown_span' id="your_trips_button">your trips</span>
-            </Link>
+            </Link> */}
           </li>
 
           <li className='profile_dropdown_navlink'> <button id="create_trip_button" >create a trip</button></li>

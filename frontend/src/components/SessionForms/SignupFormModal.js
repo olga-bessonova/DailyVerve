@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './SessionForm.css';
+import './FormModal.css';
 import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupFormModal (props) {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [image, setImage] = useState(null);
@@ -27,8 +28,11 @@ function SignupFormModal (props) {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
+      case 'firstName':
+        setState = setFirstName;
+        break;
+      case 'lastName':
+        setState = setLastName;
         break;
       case 'password':
         setState = setPassword;
@@ -47,7 +51,8 @@ function SignupFormModal (props) {
     e.preventDefault();
     const user = {
       email,
-      username,
+      firstName,
+      lastName,
       image,
       password
     };
@@ -72,6 +77,25 @@ function SignupFormModal (props) {
         </header> 
 
       <form className="login-form" onSubmit={handleSubmit}>
+        
+        <div className="firstName-div">
+          <input className="firstName-login-input" type="text"
+            value={firstName}
+            onChange={update('firstName')}
+            placeholder="First Name"
+          />
+        </div>
+        <div className="errors">{errors?.firstName}</div>
+
+        <div className="lastName-div">
+          <input className="lastName-login-input" type="text"
+            value={lastName}
+            onChange={update('lastName')}
+            placeholder="Last Name"
+          />
+        </div>
+        <div className="errors">{errors?.lastName}</div>
+
         <div className="email-div">
           <input className="email-login-input" type="text"
             value={email}
@@ -80,16 +104,6 @@ function SignupFormModal (props) {
           />
         </div>
         <div className="errors">{errors?.email}</div>
-
-
-        <div className="username-div">
-          <input className="username-login-input" type="text"
-            value={username}
-            onChange={update('username')}
-            placeholder="Username"
-          />
-        </div>
-        <div className="errors">{errors?.username}</div>
 
         <div>
           <input className="password-login-input" type="password"
@@ -120,14 +134,9 @@ function SignupFormModal (props) {
           />
         </div>
         
-        <div className="agree-message">            
-            By clicking <span className="continue-span"> Continue </span>
-            
-            I agree to Trip Club's  
-            
-            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
-            and
-            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
+        <div className="agree_span">            
+            By clicking <span className="continue-span"> Continue </span>            
+            I agree to subscribe to a <span className="continue-span"> Daily Verve </span> greeting emails             
         </div>
 
         <button type="submit" className="continue_button">Continue</button>

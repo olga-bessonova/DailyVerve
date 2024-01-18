@@ -9,7 +9,8 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
 passport.use(new LocalStrategy({
   session: false,
-  usernameField: 'email',
+  // usernameField: 'email',
+  emailField: 'email',
   passwordField: 'password',
 }, async function (email, password, done) {
   const user = await User.findOne({ email });
@@ -46,7 +47,8 @@ exports.requireUser = passport.authenticate('jwt', { session: false });
 exports.loginUser = async function(user) {
   const userInfo = {
     _id: user._id,
-    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
     profileImageUrl: user.profileImageUrl,
     email: user.email
   };

@@ -14,11 +14,11 @@ function Profile() {
   }, [currentUser, dispatch]);
 
   if (userTweets.length === 0) {
-    return <div>{currentUser.username} has no Tweets</div>;
+    return <div>{currentUser.firstName} has no Tweets</div>;
   } else {
     return (
       <>
-        <h2>All of {currentUser.username}'s Tweets</h2>
+        <h2>All of {currentUser.firstName}'s Tweets</h2>
         {userTweets.map((tweet) => (
           <TweetBox key={tweet._id} tweet={tweet} />
         ))}

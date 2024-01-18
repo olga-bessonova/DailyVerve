@@ -9,7 +9,8 @@ const users = [];
 
 users.push(
   new User({
-    username: 'olga',
+    firstName: 'olga',
+    lastName: 'B',
     email: 'olga@user.io',
     hashedPassword: bcrypt.hashSync('password', 10),
   })
@@ -17,42 +18,14 @@ users.push(
 
 users.push(
   new User({
-    username: 'stan',
+    firstName: 'Stan',
+    lastName: 'H',
     email: 'stan@user.io',
     hashedPassword: bcrypt.hashSync('password', 10),
   })
 );
 
-users.push(
-  new User({
-    username: 'peter',
-    email: 'peter@user.io',
-    hashedPassword: bcrypt.hashSync('password', 10),
-  })
-);
 
-users.push(
-  new User({
-    username: 'amin',
-    email: 'amin@user.io',
-    hashedPassword: bcrypt.hashSync('password', 10),
-  })
-);
-
-users.push(
-  new User({
-    username: 'stephen',
-    email: 'stephen@user.io',
-    hashedPassword: bcrypt.hashSync('password', 10),
-  })
-);
-
-users.push(
-  new User({
-    username: 'clarence',
-    email: 'clarence@user.io',
-    hashedPassword: bcrypt.hashSync('password', 10),
-  })
 );
 
 const NUM_SEED_TWEETS = 30;

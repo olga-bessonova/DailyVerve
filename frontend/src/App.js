@@ -10,9 +10,7 @@ import Message from './components/Message/Message';
 
 import MainPage from './components/MainPage/MainPage';
 
-import Tweets from './components/Tweets/Tweets';
 import Profile from './components/Profile/Profile';
-import TweetCompose from './components/Tweets/TweetCompose';
 
 import { getCurrentUser } from './store/session';
 
@@ -32,10 +30,7 @@ function App() {
           <Route exact path="/contact"><ContactUs /></Route>
           <AuthRoute exact path='/' component={MainPage} />
 
-          <ProtectedRoute exact path='/tweets' component={Tweets} />
           <ProtectedRoute exact path='/profile' component={Profile} />
-          <ProtectedRoute exact path='/tweets/new' component={TweetCompose} />
-
           <ProtectedRoute exact path='/messages' component={Message} />
 
         </Switch>

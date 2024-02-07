@@ -32,15 +32,15 @@ const LoginFormModal = (props) => {
     });
   };
 
-  const handleDemo = (e) => {
-    dispatch(sessionActions.login({ 
-      email: 'demo@user.io', 
-      password: 'password' 
-    }))
-    .then(res => {
-      if (res.currentUser)  setShowLoginModal(false)
-    }); 
-  };
+  // const handleDemo = (e) => {
+  //   dispatch(sessionActions.login({ 
+  //     email: 'demo@user.io', 
+  //     password: 'password' 
+  //   }))
+  //   .then(res => {
+  //     if (res.currentUser)  setShowLoginModal(false)
+  //   }); 
+  // };
 
   const handleOlga = (e) => {
     dispatch(sessionActions.login({ 
@@ -63,7 +63,7 @@ const LoginFormModal = (props) => {
   };
 
   if (user) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/messages" />;
   };
 
   return (
@@ -102,9 +102,9 @@ const LoginFormModal = (props) => {
 
     </form>
 
-        <div id="demo-button-div">
+        {/* <div id="demo-button-div">
           <button className="demo_button" onClick={handleDemo}>Continue with Demo User</button>
-        </div>  
+        </div>   */}
 
         <div id="demo-button-div">
           <button className="demo_button" onClick={handleOlga}>Continue as Olga</button>

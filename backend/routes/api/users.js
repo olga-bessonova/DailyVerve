@@ -21,6 +21,7 @@ router.get('/', function (req, res, next) {
 // POST /api/users/register
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email
+  debugger
   const user = await User.findOne({
     $or: [{ email: req.body.email }],
   });
@@ -67,13 +68,18 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
 
 // POST /api/users/login
 router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, res, next) => {
-  passport.authenticate('local', async function (err, user) {
+  // console.log(req.body)
+  // console.log("user:", user)
+  const user = req.body
+  await passport.authenticate('local', async function (err, user) {
     if (err) return next(err);
     if (!user) {
+      console.log(user)
       const err = new Error('Invalid credentials');
       err.statusCode = 400;
       err.errors = { email: 'Invalid credentials' };
       return next(err);
+
     }
     // return res.json({ user });
     return res.json(await loginUser(user));

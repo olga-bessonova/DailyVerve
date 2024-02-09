@@ -46,7 +46,6 @@ router.post('/', requireUser, async (req, res, next) => {
 
     return res.json(message);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });

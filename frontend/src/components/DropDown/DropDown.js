@@ -10,7 +10,6 @@ const DropDown = ({ user }) => {
   const dispatch = useDispatch();
   
   const toggleMenu = () => {
-    // debugger
     setMenu(open => !open);
   };
   const [menu, setMenu] = useState(false);

@@ -82,6 +82,7 @@ exports.requireUser = passport.authenticate('jwt', { session: false });
 // user
 exports.restoreUser = (req, res, next) => {
   return passport.authenticate('jwt', { session: false }, function(err, user) {
+    if (err) return next(err);
     if (user) req.user = user;
     next();
   })(req, res, next);

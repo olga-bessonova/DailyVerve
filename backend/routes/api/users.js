@@ -20,10 +20,9 @@ router.get('/', function (req, res, next) {
 
 // POST /api/users/register
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
-  // Check to make sure no one has already registered with the proposed email or
-  // username.
+  // Check to make sure no one has already registered with the proposed email
   const user = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }],
+    $or: [{ email: req.body.email }],
   });
 
   if (user) {
@@ -33,9 +32,6 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
     const errors = {};
     if (user.email === req.body.email) {
       errors.email = 'A user has already registered with this email';
-    }
-    if (user.username === req.body.username) {
-      errors.username = 'A user has already registered with this username';
     }
     err.errors = errors;
     return next(err);
@@ -47,7 +43,8 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
       DEFAULT_PROFILE_IMAGE_URL;
 
   const newUser = new User({
-    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     profileImageUrl,
     email: req.body.email
   });
@@ -70,13 +67,16 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
 
 // POST /api/users/login
 router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, res, next) => {
-  passport.authenticate('local', async function (err, user) {
+  const user = req.body
+  await passport.authenticate('local', async function (err, user) {
     if (err) return next(err);
     if (!user) {
+      console.log(user)
       const err = new Error('Invalid credentials');
       err.statusCode = 400;
       err.errors = { email: 'Invalid credentials' };
       return next(err);
+
     }
     // return res.json({ user });
     return res.json(await loginUser(user));
@@ -94,7 +94,8 @@ router.get('/current', restoreUser, (req, res) => {
   if (!req.user) return res.json(null);
   res.json({
     _id: req.user._id,
-    username: req.user.username,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
     profileImageUrl: req.user.profileImageUrl,
     email: req.user.email,
   });

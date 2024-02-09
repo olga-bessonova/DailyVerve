@@ -1,5 +1,4 @@
 require('./models/User');
-require('./models/Tweet');
 require('./models/Message');
 require('./config/passport');
 const express = require('express');
@@ -8,7 +7,6 @@ const logger = require('morgan');
 const debug = require('debug');
 const passport = require('passport');
 const usersRouter = require('./routes/api/users');
-const tweetsRouter = require('./routes/api/tweets');
 const csrfRouter = require('./routes/api/csrf');
 const messagesRouter = require('./routes/api/messages');
 const cors = require('cors');
@@ -44,7 +42,6 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
-app.use('/api/tweets', tweetsRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/messages', messagesRouter);
 

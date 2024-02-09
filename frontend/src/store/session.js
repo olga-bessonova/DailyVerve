@@ -31,13 +31,15 @@ export const signup = (user) => startSession(user, 'api/users/register');
 export const login = (user) => startSession(user, 'api/users/login');
 
 const startSession = (userInfo, route) => async (dispatch) => {
-  const { image, username, password, email } = userInfo;
-  const formData = new FormData();
-  formData.append("username", username);
-  formData.append("password", password);
-  formData.append("email", email);
-  if (image) formData.append("image", image);
-  
+ 
+    const { image, firstName, lastName, password, email } = userInfo;
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("password", password);
+    formData.append("email", email);
+    if (image) formData.append("image", image);
+
   try {
     const res = await jwtFetch(route, {
       method: 'POST',

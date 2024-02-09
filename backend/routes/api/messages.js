@@ -42,11 +42,10 @@ router.post('/', requireUser, async (req, res, next) => {
     });
 
     let message = await newMessage.save();
-    message = await message.populate('owner', '_id username profileImageUrl');
+    message = await message.populate('owner', '_id firstName lastName profileImageUrl');
 
     return res.json(message);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -55,7 +54,7 @@ router.post('/', requireUser, async (req, res, next) => {
 router.post('/email', async (req, res, next) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   // scheduleJob * seconds, * minutes, * hours, * day of month (1-31), * month, * day of week
-  const job = schedule.scheduleJob('* 22 * * *', function () {
+  const job = schedule.scheduleJob('5 13 * * *', function () {
     const msg = {
       to: req.body.email,
       from: 'info.daily.verve@gmail.com',
